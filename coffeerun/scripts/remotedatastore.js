@@ -28,10 +28,15 @@
   RemoteDataStore.prototype.remove = function(key) {
     $.get(this.serverUrl + "?emailAddress=" + key, function(serverResponse) {
       var myID = (serverResponse[0].id);
-      $.ajax("http://localhost:2403/coffeeorders" + "/" + myID, {
+
+      console.log(this.serverUrl);
+      //$.ajax("http://localhost:2403/coffeeorders" + "/" + myID, {
+      $.ajax(this.serverUrl + "/" + myID, {
         type: "DELETE"
+      }, function() {
+        console.log(this.serverUrl);
       });
-    });
+    }.bind(this));
   };
   App.RemoteDataStore = RemoteDataStore;
   window.App = App;

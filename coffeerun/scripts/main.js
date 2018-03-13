@@ -18,6 +18,16 @@
   checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));
   var formHandler = new FormHandler(FORM_SELECTOR);
 
+  remoteDS.getAll(function(response){
+    var CheckList = App.CheckList;
+    var checkList = new CheckList(CHECKLIST_SELECTOR);
+    var i = response.length;
+    console.log(i);
+    for(var j = 0; j < i; j++) {
+      checkList.addRow(response[j]);
+    }
+  });
+
   formHandler.addSubmitHandler(function(data) {
     myTruck.createOrder(data);
     checkList.addRow(data);
